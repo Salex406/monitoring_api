@@ -1,0 +1,57 @@
+syntax = "proto2";
+
+enum Method
+{
+  SET                                   = 0;
+  GET                                   = 1;
+}
+
+
+message Message
+{
+    required string uid                 = 1;              /* серийный номер устройства (96 bit ID), max_size = 12 */
+    optional Data data                  = 2;              /* данные */
+    optional MCUSettings mcuSettings    = 3;              /* настройки устройства */
+}
+
+message Data
+{
+    required Method data_method         = 1;
+    repeated Sensor Sensor              = 2;
+}
+
+message Sensor
+{
+    optional float value                = 1;            /* измеренное датчиком значение */
+    optional float max_value            = 2;            /* верхнее пороговое значение */
+    optional float min_value            = 3;            /* нижнее пороговое значение */
+    required SensorType sensor_type     = 4;            /* тип датчика */
+    //TODO настройки подключения, порты, каналы
+    // TODO возможно какие-то иные настройки для конкретных датчиков
+}
+
+message MCUSettings
+{
+    required Method method              = 1;
+    optional uint32 firmwareVersion     = 2;                /* версия прошивки устройства, только для чтения */
+    optional uint32 protobufVersion     = 3; 
+    /* 
+        Версия protobuf, только для чтения. Старшие 2 байта указывают на версию proto: 2 или 3. 
+        Младшие 2 байта на версию, применительную к полям файла. 
+    */
+    optional uint32 rtcTimestamp        = 4;                /* временная метка часов реального времени */
+
+    //TODO: настройки микроконтроллера
+}
+
+
+enum SensorType
+{
+    TEMPERATURE                         = 0;
+    HUMIDITY                            = 1;
+    MOTION                              = 2;
+    SMOKE                               = 3;
+    WATER                               = 4;
+    TAMPER                              = 5;
+    VIBRATION                           = 6;
+}
