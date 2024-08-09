@@ -47,11 +47,19 @@ message MCUSettings
 
 enum SensorType
 {
-    TEMPERATURE                         = 0;
-    HUMIDITY                            = 1;
-    MOTION                              = 2;
-    SMOKE                               = 3;
-    WATER                               = 4;
-    TAMPER                              = 5;
-    VIBRATION                           = 6;
+    Rapid_5                             = 0;
+    Piron_4                             = 1;
+    IP_212_45                           = 2;
+    IPD_3_2_M                           = 3;
+    IO_102_2                            = 4;
+    Vodoley_P                           = 5;
+    DZ_4                                = 6;
+    ASTRA_361                           = 7;
+    SHOROH_2                            = 8;
+    DS18B20                             = 9;
+    DHT22                               = 10;
+    RD_710                              = 11;
+    SA_913_FM                           = 12;
+    ST_DM125NO_WT                       = 13;
+    IP_212_44                           = 14;
 }
