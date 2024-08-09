@@ -19,7 +19,8 @@ message Message
 message Data
 {
     required Method data_method         = 1;
-    repeated Sensor Sensor              = 2 [(nanopb).max_count = 20]; /* Массив структур датчиков */
+    required char Sensor_num            = 2;
+    repeated Sensor Sensor              = 3 [(nanopb).max_count = 20]; /* Массив структур датчиков */
 }
 
 message Sensor
