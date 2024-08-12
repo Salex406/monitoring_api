@@ -11,7 +11,7 @@ enum Method
 
 message Message
 {
-    required string uid                 = 1 [(nanopb).max_count = 12]; /* серийный номер устройства (96 bit ID), max_size = 12 */
+    required string uid                 = 1;              /* серийный номер устройства (96 bit ID), max_size = 12 */
     optional Data data                  = 2;              /* данные */
     optional MCUSettings mcuSettings    = 3;              /* настройки устройства */
 }
