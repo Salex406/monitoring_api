@@ -11,7 +11,7 @@ enum Method
 
 message Message
 {
-    required string uid                 = 1;              /* серийный номер устройства (96 bit ID), max_size = 12 */
+    required uint32 uid                 = 1;              /* серийный номер устройства */
     optional Data data                  = 2;              /* данные */
     optional MCUSettings mcuSettings    = 3;              /* настройки устройства */
 }
@@ -27,7 +27,7 @@ message Sensor
     optional float value                = 1;            /* измеренное датчиком значение */
     optional float max_value            = 2;            /* верхнее пороговое значение */
     optional float min_value            = 3;            /* нижнее пороговое значение */
-    required bool IsOn                  = 4;            /* включить-выключить датчик */
+    optional bool isOn                  = 4;            /* включить-выключить датчик */
     required SensorType sensor_type     = 5;            /* тип датчика */
     //TODO настройки подключения, порты, каналы
     //TODO возможно какие-то иные настройки для конкретных датчиков
