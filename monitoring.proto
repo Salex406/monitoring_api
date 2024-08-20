@@ -1,0 +1,68 @@
+syntax = "proto2";
+
+
+enum Method
+{
+  SET                                   = 0;
+  GET                                   = 1;
+}
+
+
+message Message
+{
+    required uint32 uid                 = 1;              /* серийный номер устройства */
+    optional Data data                  = 2;              /* данные */
+    optional MCUSettings mcuSettings    = 3;              /* настройки устройства */
+}
+
+message Data
+{
+    required Method data_method         = 1;
+    repeated Sensor Sensor              = 2;            /* Массив структур датчиков */
+}
+
+message Sensor
+{
+    optional float value                = 1;            /* измеренное датчиком значение */
+    optional float max_value            = 2;            /* верхнее пороговое значение */
+    optional float min_value            = 3;            /* нижнее пороговое значение */
+    optional bool IsOn                  = 4;            /* включить-выключить датчик */
+    required SensorType sensor_type     = 5;            /* тип датчика */
+    //TODO настройки подключения, порты, каналы
+    //TODO возможно какие-то иные настройки для конкретных датчиков
+}
+
+message MCUSettings
+{
+    required Method method              = 1;
+    optional uint32 firmwareVersion     = 2;                /* версия прошивки устройства, только для чтения */
+    optional uint32 protobufVersion     = 3; 
+    /* 
+        Версия protobuf, только для чтения. Старшие 2 байта указывают на версию proto: 2 или 3. 
+        Младшие 2 байта на версию, применительную к полям файла. 
+    */
+    optional uint32 rtcTimestamp        = 4;                /* временная метка часов реального времени */
+
+    //TODO: настройки микроконтроллера
+}
+
+
+enum SensorType
+{
+    Rapid_5                             = 0;                //датчик движения 
+    Piron_4                             = 1;                //датчик движения
+    IP_212_45                           = 2;                //датчик задымления
+    IPD_3_2_M                           = 3;                //датчик задымления
+    IO_102_2                            = 4;                //датчик открытия дверей
+    Vodoley_P                           = 5;                //датчик протечки
+    DZ_4                                = 6;                //датчик протечки
+    ASTRA_361                           = 7;                //датчик протечки
+    SHOROH_2                            = 8;                //датчик вибрации
+    DS18B20                             = 9;                //датчик температуры
+    DHT22_temp                          = 10;                //датчик температуры и влажности
+    DHT22_humidity                      = 11;                //датчик температуры и влажности
+    RD_710                              = 12;                //извещатель(сирена)
+    SA_913_FM                           = 13;                //извещатель(сирена)
+    ST_DM125NO_WT                       = 14;                //датчик открытия дверей
+    IP_212_44                           = 15;                //датчик задымления
+}
