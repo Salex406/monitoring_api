@@ -19,8 +19,7 @@ message Message
 message Data
 {
     required Method data_method         = 1;
-    required uint32 Sensor_num          = 2;
-    repeated Sensor Sensor              = 3 [(nanopb).max_count = 20]; /* Массив структур датчиков */
+    repeated Sensor Sensor              = 2 [(nanopb).max_count = 20]; /* Массив структур датчиков */
 }
 
 message Sensor
@@ -28,9 +27,10 @@ message Sensor
     optional float value                = 1;            /* измеренное датчиком значение */
     optional float max_value            = 2;            /* верхнее пороговое значение */
     optional float min_value            = 3;            /* нижнее пороговое значение */
-    required SensorType sensor_type     = 4;            /* тип датчика */
+    required bool IsOn                  = 4;            /* включить-выключить датчик */
+    required SensorType sensor_type     = 5;            /* тип датчика */
     //TODO настройки подключения, порты, каналы
-    // TODO возможно какие-то иные настройки для конкретных датчиков
+    //TODO возможно какие-то иные настройки для конкретных датчиков
 }
 
 message MCUSettings
@@ -60,9 +60,10 @@ enum SensorType
     ASTRA_361                           = 7;                //датчик протечки
     SHOROH_2                            = 8;                //датчик вибрации
     DS18B20                             = 9;                //датчик температуры
-    DHT22                               = 10;                //датчик температуры и давления
-    RD_710                              = 11;                //извещатель(сирена)
-    SA_913_FM                           = 12;                //извещатель(сирена)
-    ST_DM125NO_WT                       = 13;                //датчик открытия дверей
-    IP_212_44                           = 14;                //датчик задымления
+    DHT22_temp                          = 10;                //датчик температуры и влажности
+    DHT22_humidity                      = 11;                //датчик температуры и влажности
+    RD_710                              = 12;                //извещатель(сирена)
+    SA_913_FM                           = 13;                //извещатель(сирена)
+    ST_DM125NO_WT                       = 14;                //датчик открытия дверей
+    IP_212_44                           = 15;                //датчик задымления
 }
