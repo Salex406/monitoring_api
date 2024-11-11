@@ -28,6 +28,7 @@ message Sensor
     optional float min_value            = 3;            /* нижнее пороговое значение */
     optional bool isOn                  = 4;            /* включить-выключить датчик */
     required SensorType sensor_type     = 5;            /* тип датчика */
+    required uint32 pin                 = 6;            /* номер канала (0-40)*/
     //TODO настройки подключения, порты, каналы
     //TODO возможно какие-то иные настройки для конкретных датчиков
 }
