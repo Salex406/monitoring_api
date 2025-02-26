@@ -13,6 +13,7 @@ message Message
     required uint32 uid                 = 1;              /* серийный номер устройства */
     optional Data data                  = 2;              /* данные */
     optional MCUSettings mcuSettings    = 3;              /* настройки устройства */
+    optional MCUUpdate mcuUpdate        = 4;              /* структура для перепрошивки МК*/
 }
 
 message Data
@@ -46,7 +47,35 @@ message MCUSettings
 
     //TODO: настройки микроконтроллера
 }
+message MCUUpdate
+{
+    oneof UPDStat
+    {
+        UPDStart upd_start              = 1;               /* Информация об устанавливаемом обновлении */
+        FlashPage flash_page            = 2;               /* Страница обновления */
+        UPDStatus upd_status            = 3;               /* Статус-посылка */
+    }
+}
 
+message UPDStart
+{
+    required uint32 firmware_size       = 1;               /* Размер прошивки стрпаницах флешки */
+    required uint32 firmware_crc        = 2;               /* CRC прошивки */
+    required uint32 timestamp           = 3;               /* Время */
+}
+
+message FlashPage
+{
+    required bytes page_data           = 1;               /* (max 4096) Данные страницы флешки*/ 
+}
+
+enum UPDStatus
+{
+    ready_to_receive                    = 0;              /* Готов к получению следующей страницы */
+    update_finished                     = 1;              /* Обновление завершено успешно*/
+    page_crc_error                      = 2;              /* Ошибка CRC пакета */
+    update_error                        = 3;              /* Обновление завершено с ошибками */
+}
 
 enum SensorType
 {
@@ -60,9 +89,9 @@ enum SensorType
     ASTRA_361                           = 7;                //датчик протечки
     SHOROH_2                            = 8;                //датчик вибрации
     DS18B20                             = 9;                //датчик температуры
-    DHT22                               = 10;                //датчик температуры и влажности
-    RD_710                              = 11;                //извещатель(сирена)
-    SA_913_FM                           = 12;                //извещатель(сирена)
-    ST_DM125NO_WT                       = 13;                //датчик открытия дверей
-    IP_212_44                           = 14;                //датчик задымления
+    DHT22                               = 10;               //датчик температуры и влажности
+    RD_710                              = 11;               //извещатель(сирена)
+    SA_913_FM                           = 12;               //извещатель(сирена)
+    ST_DM125NO_WT                       = 13;               //датчик открытия дверей
+    IP_212_44                           = 14;               //датчик задымления
 }
