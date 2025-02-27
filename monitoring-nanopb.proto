@@ -69,7 +69,7 @@ message UPDStart
 
 message FlashPage
 {
-    required bytes page_data          = 1 [(nanopb).max_size = 4096]; /* Данные страницы флешки*/
+    required bytes page_data          = 1 [(nanopb).max_size = 512]; /* Данные страницы флешки*/
 }
 
 enum UPDStatus
