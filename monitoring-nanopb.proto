@@ -15,6 +15,7 @@ message Message
     optional Data data                  = 2;              /* данные */
     optional MCUSettings mcuSettings    = 3;              /* настройки устройства */
     optional MCUUpdate   mcuUpdate      = 4;              /* структура для перепрошивки МК*/
+    optional string firmwareVersion     = 5 [(nanopb).max_length = 12]; /* версия прошивки устройства, только для чтения */
 }
 
 message Data
@@ -38,13 +39,12 @@ message Sensor
 message MCUSettings
 {
     required Method method              = 1;
-    optional uint32 firmwareVersion     = 2;                /* версия прошивки устройства, только для чтения */
-    optional uint32 protobufVersion     = 3; 
+    optional uint32 protobufVersion     = 2; 
     /* 
         Версия protobuf, только для чтения. Старшие 2 байта указывают на версию proto: 2 или 3. 
         Младшие 2 байта на версию, применительную к полям файла. 
     */
-    optional uint32 rtcTimestamp        = 4;                /* временная метка часов реального времени */
+    optional uint32 rtcTimestamp        = 3;                /* временная метка часов реального времени */
 
     //TODO: настройки микроконтроллера
 }
