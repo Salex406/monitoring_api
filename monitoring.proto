@@ -67,7 +67,7 @@ message UPDStart
 message FlashPage
 {
     required bytes page_data           = 1;               /* (max 512) Данные страницы флешки*/
-    required page_CRC                  = 2;
+    required uint32 page_CRC           = 2;
 }
 
 enum UPDStatus
