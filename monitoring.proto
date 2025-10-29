@@ -7,6 +7,11 @@ enum Method
   GET                                   = 1;
 }
 
+enum PowerMethod
+{
+  MAIN                                   = 0;
+  BATTERY                                = 1;
+}
 
 message Message
 {
@@ -15,6 +20,14 @@ message Message
     optional MCUSettings mcuSettings    = 3;              /* настройки устройства */
     optional MCUUpdate mcuUpdate        = 4;              /* структура для перепрошивки МК*/
     optional string firmwareVersion     = 5;              /* версия прошивки устройства, только для чтения */
+    optional PowerStatus powerStatus    = 6;
+}
+
+
+message PowerStatus
+{
+    optional uint32 percentage          = 1;
+    required PowerMethod powerMethod    = 2;
 }
 
 message Data
